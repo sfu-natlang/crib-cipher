@@ -1,0 +1,10 @@
+It is not trivial to get plain text data from Wikipedia.
+
+The closest you can get is to use the WikiMedia API to get a XML document containing within a HTML rendering of the page in question.
+
+For example, to get the page on "History", you would do this:
+https://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles=History&format=xml
+
+From that point on, you can strip out HTML tags to obtain a not terrible plaintext. You can also delete items in between tags to remove sections, headers, etc...
+
+#TODO: Discover and describe a good way to do outer XML -> inner HTML -> Nuhn-type plaintext 
