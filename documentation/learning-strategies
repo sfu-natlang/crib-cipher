@@ -1,0 +1,23 @@
+1. Greedy.
+
+Learn whatever you can, no matter what.
+Given the crib KILL and ??L?, learn all three unknown symbols as K, I and L, respectively.
+
+
+2. One letter at most.
+
+Only learn up to one letter.
+Given ?ILL, you can learn ?=K. Otherwise don't bother, as you risk mislearning.
+
+
+3. Only if no other word would fit.
+
+Learn only when no other word could possibly match the current pattern of unknowns.
+K??L is unlearnable because it could also be KEEL or KOHL. K?LL is fine and you can learn ?=I.
+
+
+4. Probabilistic.
+
+Depending on some notion of likelyhood.
+K??L should be learnable as KILL because KEEL occurs much rarer than KILL does.
+(Unless the cipher is in some kind of nautical domain, in which case tough luck.)
