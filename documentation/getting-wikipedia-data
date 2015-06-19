@@ -1,6 +1,12 @@
-It is not trivial to get plain text data from Wikipedia.
+It is trivial to get plain text data from Wikipedia.
 
-The closest you can get is to use the WikiMedia API to get a XML document containing within a HTML rendering of the page in question.
+Use get_wiki.sh
+Usage examples:
+./get_wiki.sh History
+./get_wiki.sh Mathematics
+
+Old documentation of the process, as used by get_wiki.sh:
+The closest you can get to easy access is to use the WikiMedia API to get a XML document containing within a HTML rendering of the page in question.
 
 For example, to get the page on "History", you would do this:
 wget -O wiki.xml https://en.wikipedia.org/w/api.php?action=query\&prop=extracts\&titles=History\&format=xml
