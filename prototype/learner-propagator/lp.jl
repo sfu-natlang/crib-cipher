@@ -5,8 +5,10 @@ function create_blank_table()
     return Array(Int, 1024)
 end
 
+UNCOMMITTED = -1
+
 function add_to_table(table, cipher_letter, translation)
-    if (table[cipher_letter] != -1) && (table[cipher_letter] != translation)
+    if (table[cipher_letter] != UNCOMMITTED) && (table[cipher_letter] != translation)
         abort()
     end
     table[cipher_letter] = translation
@@ -16,6 +18,11 @@ end
 
 ## Dictionary handling
 function read_dictionary()
+    #STUB
+end
+
+## Cipher read-in
+function read_cipher()
     #STUB
 end
 
@@ -33,12 +40,39 @@ function learn_word(table, ciphertext, word, initial_position)
     return table
 end
 
+GREEDY = 0
+policy = GREEDY
 
 ## Scanner for permitted types
-function scan_for_match(cipher, word, initial_position)
-    #Depends on learning policy?
+function scan_for_match(cipher, table, word, initial_position)
+    if (policy == GREEDY)
+        return any_matches(cipher, table, word, initial_position)
+    end
 end
 
+##At least one letter matching.
+##No misses.
+function any_matches(cipher, table, word, initial_position)
+    hits = 0
+    misses = 0
+
+    end_position = initial_position + length(word)
+
+    in_word = 0
+    for position in initial_position:end_position
+        if table[cipher[position]] == word[in_word]
+	    hits = hits + 1
+	elseif table[cipher[position]] == UNCOMITTED
+	    #Do nothing
+	else
+	    misses = misses + 1
+	end
+	in_word = in_word + 1
+    end
+
+    return hits > 0 && misses < 1
+end
+    
 
 ##The main loop which iteratively learns more and more symbols
 function propagation_loop(cipher, word, initial_position)
@@ -54,7 +88,7 @@ function propagation_loop(cipher, word, initial_position)
 	end_position = length(ciphertext) - length(word)
 
 	for position in 1:end_position
-	    match_found = scan_for_match(cipher, word, position)
+	    match_found = scan_for_match(cipher, table, word, position)
 	    #if not full match
 	        #if possible to learn such a match
 		    #learn
@@ -88,6 +122,14 @@ function march_word(ciphertext, word)
 
 end
 
+MAJORITY_VOTE = 0
+combine_rule = MAJORITY_VOTE
+
+function combine_many_march_results(results)
+    if combine_rule == MAJORITY_VOTE
+        return majority_combiner(results)
+    end
+end
 
 ## March many words across the ciphertext.
 function main_loop()
