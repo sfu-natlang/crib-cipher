@@ -14,4 +14,12 @@ You now have wiki.html, which contains HTML of the article. Notably there are no
 From this point on, you can use html2text to quickly convent the data to markdown format.
 Section headers can be now removed by grepping for lines not starting with a #.
 
-#TODO: inner HTML -> Nuhn-type plaintext
+html2text wiki.html | egrep -v "^#" > wiki.txt
+
+To strip out non alpha characters you can use sed and to lowercase the whole file you can use tr.
+
+sed -e 's/[^a-zA-Z]/ /g' < wiki.txt | tr '[:upper:]' '[:lower:]' > wiki_scrubbed.txt
+
+Finally, one more application of tr gets rid of newlines and more-than-once spaces.
+
+tr '\n' ' ' < wiki_scrubbed.txt | tr -s ' ' > wiki_final.txt
