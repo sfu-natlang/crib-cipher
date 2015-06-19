@@ -11,4 +11,7 @@ xmlstarlet sel -T -t -c api wiki.xml > wiki.html
 
 You now have wiki.html, which contains HTML of the article. Notably there are no anchors, only the text of the article is present.
 
-#TODO: inner HTML -> Nuhn-type plaintext 
+From this point on, you can use html2text to quickly convent the data to markdown format.
+Section headers can be now removed by grepping for lines not starting with a #.
+
+#TODO: inner HTML -> Nuhn-type plaintext
